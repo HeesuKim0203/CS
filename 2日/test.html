@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+// 대표적인 싱글톤 패턴
+
+const object1= {
+    a : 27
+} ;
+
+const object2 = {
+    a : 27
+} ;
+
+console.log(object1 == object2) ;
+
+class Singleton {
+    constructor() {
+        if( !Singleton.instance ) {
+            Singleton.instance = this ;
+        }
+        return Singleton.instance ;
+    }
+
+    getInstance() {
+        return this.instance ;
+    }
+}
+
+const a = new Singleton() ;
+const b = new Singleton() ;
+
+console.log(a == b) ;
+
+</script>
+
+</html>
