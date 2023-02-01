@@ -41,6 +41,29 @@ const b = new Singleton() ;
 
 console.log(a == b) ;
 
+const URL = 'mongodb://'
+const createConnection = url => ({ url })
+
+class DB {
+    constructor( url ) {
+        if(!DB.instance) {
+            DB.instance = createConnection(url) ;
+        }
+
+        return DB.instance ;
+
+    }
+
+    connect() {
+        return this.instance ;
+    }
+}
+
+const c = new DB(URL) ;
+const d = new DB(URL) ;
+
+console.log(c === d) ;
+
 </script>
 
 </html>
