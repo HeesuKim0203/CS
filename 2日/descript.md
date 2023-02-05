@@ -2,7 +2,13 @@
 
 보통은 하나의 클래스에서 다양한 인스턴스를 생성하여 사용합니다. 싱글톤 패턴은 하나의 인스턴스를 만들어 놓고 해당 인스턴스를 다른 모듈들이 공유하며 사용하는 패턴입니다.   
 
+좀 더 전문적인 용어로 애플리케이션이 시작될 때 어떤 클래스가 최초 한번만 메모리를 할당하고(static) 그 메모리에 인스턴스를 만들어서 사용하는 디자인 패턴 이라고 정의할 수 있습니다.   
+
 대표적인 예로는 데이터베이스 연결 모듈이나 안드로이드 앱에서 자주 보입니다.  
+
+### 모듈이란?
+
+외부에서 영향을 받지 않는 독립된, 재사용 가능한 코드들의 묶음  
 
 ### 장점
 
@@ -22,5 +28,8 @@
 Javascript 의존성 주입  
 [https://velog.io/@moongq/Dependency-Injection](https://velog.io/@moongq/Dependency-Injection)
  
+의존성 주입의 의존 관계 역전의 원칙
+[https://brownbears.tistory.com/581](https://brownbears.tistory.com/581)
+
 의존성 주입이란 ?  
 [https://ko.wikipedia.org/wiki/%EC%9D%98%EC%A1%B4%EC%84%B1_%EC%A3%BC%EC%9E%85](https://ko.wikipedia.org/wiki/%EC%9D%98%EC%A1%B4%EC%84%B1_%EC%A3%BC%EC%9E%85)
