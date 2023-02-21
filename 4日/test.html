@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+class MovableStrategy {
+    move() {}
+}
+
+class RoadStrategy extends MovableStrategy {
+    move() {
+        console.log("도로로 이동합니다.") ;
+    }
+}
+
+class RailStrategy extends MovableStrategy {
+    move() {
+        console.log("철도로 이동합니다.") ;
+    }
+}
+
+class MovTransportation {
+    move() {}
+    moveStrategy(MovableStrategy) {
+        this.move() ;
+        MovableStrategy.move() ;
+    }
+}
+
+class Car extends MovTransportation {
+    move() {
+        console.log("차동차를 타고") ;
+    }
+} 
+
+class Train extends MovTransportation {
+    move() {
+        console.log("열차를 타고") ;
+    }
+}
+
+const main = () => {
+    
+    const car = new Car() ;
+    const train = new Train() ;
+
+    car.moveStrategy(new RailStrategy()) ;
+    car.moveStrategy(new RoadStrategy()) ;
+ 
+}
+
+main() ;
+
+</script>
+
+</html>

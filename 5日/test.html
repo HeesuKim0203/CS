@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+class Subject {
+    register(observers) {} ;
+    unregister(observers) {};
+    notifyObservers() {};
+    getUpdate(observers) {};
+}
+
+class Observer {
+    update() {};
+}
+
+class Topic {
+    
+    constructor() {
+        this.observers = [] ;
+        this.message = "" ;
+    }
+
+    register(obj) {
+        this.observers = [
+            ...this.observers, obj
+        ] ;
+    }
+
+    unregister(obj) {
+
+        const index = this.observers.indexOf(obj) ;
+
+        if ( index !== -1 ) {
+            this.observers = [ 
+                ...this.observers.slice(0, index),
+                ...this.observers.slice(index + 1, this.observers.length) 
+            ] ;
+            
+            return true ;
+
+        } else {
+            return false ;
+        }
+    }
+
+    notifyObservers() {
+        this.observers.forEach((value) => {
+                value.update() ;
+        }) ;
+    }
+
+    getUpdate(obj) {
+        return this.message ;
+    }
+
+    postMessage(msg) {
+        console.log(`Message sended to Topic : ${msg}`) ;
+        this.message = msg ;
+        this.notifyObservers() ;
+    }
+}
+
+class TopicSubscriber {
+    
+    constructor(name, topic) {
+        this.name = name ;
+        this.topic  = topic ;
+    }
+
+    update() {
+        const msg = this.topic.getUpdate(this) ;
+        console.log(`name ${this.name} got messge >> ${msg}`) ;
+    }
+
+}
+
+const main = (() => {
+
+    const topic = new Topic() ;
+    const a = new TopicSubscriber("a", topic) ;
+    const b = new TopicSubscriber("b", topic) ;
+    const c = new TopicSubscriber("c", topic) ;
+
+    topic.register(a) ;
+    topic.register(b) ;
+    topic.register(c) ;
+    
+    topic.postMessage("Hello") ;
+
+
+    topic.unregister(a) ;
+
+    topic.postMessage("Bye") ;
+
+})() ;
+
+
+</script>
+
+</html>
