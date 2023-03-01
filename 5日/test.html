@@ -83,7 +83,43 @@ class TopicSubscriber {
 
 }
 
+const handler = {
+    get : function(target, name) {
+
+        if(name === 'set') return 'Set function!' ;
+
+        return name === 'name' ? `${target.a} ${target.b}` : target[name] ;
+    },
+
+}
+
+function createReactiveObject(target, callback) {
+    const proxy = new Proxy(target, {
+        set(obj, prop, value) {
+            if(value !== obj[prop]) {
+                const prev = obj[prop] ;
+                obj[prop] = value ;
+                callback(`${prop}가 [${prev}] >> [${value}]로 변경되었습니다.`)
+            }
+
+            return true ;
+        }
+    })
+
+    return proxy ;
+
+}
+
 const main = (() => {
+
+    const d = {
+        "형규" : "솔로"
+    } ;
+
+    const x = createReactiveObject(d, console.log)
+
+    x.형규 = "솔로"
+    x.형규 = "커플"
 
     const topic = new Topic() ;
     const a = new TopicSubscriber("a", topic) ;
@@ -96,10 +132,13 @@ const main = (() => {
     
     topic.postMessage("Hello") ;
 
-
     topic.unregister(a) ;
 
     topic.postMessage("Bye") ;
+
+    const p = new Proxy({a : 'KUNDOL', b : 'IS AUMUMU ZANGIN'}, handler) ;
+    console.log(p.name) ;
+    console.log(p.set) ;
 
 })() ;
 
